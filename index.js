@@ -34,11 +34,12 @@ setupForm.addEventListener('submit', (e) => {
     gameCounter.innerHTML = ""
 
     const playerNames = document.querySelectorAll('#names input')
-    playerNames.forEach((name) => {
+    playerNames.forEach((name, index) => {
         const playerCard = document.createElement('div')
         playerCard.classList.add('player-card')
         const playerName = document.createElement('p')
-        playerName.innerText = name.value
+
+        playerName.innerText = name.value.trim() !== "" ? name.value : `Player ${index + 1}`;
         playerName.classList.add('player-name')
 
         let points = 0
