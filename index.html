@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Scorizo</title>
+</head>
+<body>
+<main>
+    <div id="setup-form-wrapper">
+        <form id="setup-form">
+            <h1>Game settings</h1>
+            <div id="players">
+                <h2>Total players</h2>
+                <div class="radio-group">
+                    <input type="radio" name="players" id="2" value="2" checked="checked">
+                    <label for="2">2</label>
+                    <input type="radio" name="players" id="3" value="3">
+                    <label for="3">3</label>
+                    <!--          TODO: add 4th player option, either as a 2v2 or FFA-->
+                </div>
+            </div>
+
+            <div id="names">
+                <!--handled by JS-->
+            </div>
+
+            <div id="points">
+                <h2>Goal</h2>
+                <div class="radio-group">
+                    <input type="radio" name="points" id="51" value="51" checked="checked">
+                    <label for="51">51 points</label>
+                    <input type="radio" name="points" id="101" value="101">
+                    <label for="101">101 points</label>
+                    <!--        TODO: add custom value option-->
+                </div>
+            </div>
+            <input type="submit" value="Start">
+        </form>
+    </div>
+    <div id="game-counter">
+        <!--handled by JS-->
+    </div>
+    <button id="reset">Reset</button>
+</main>
+</body>
+<script src="index.js"></script>
+</html>
