@@ -1,75 +1,75 @@
-const setupForm = document.getElementById('setup-form')
-const playerNamesForm = document.getElementById("names")
-const gameCounter = document.getElementById("game-counter")
+const gameSetupForm = document.getElementById('setup-form')
+const playerNameInputs = document.getElementById("names")
+const scoreBoard = document.getElementById("game-counter")
 const resetBtn = document.getElementById("reset")
 
 let playerCount = 2
 let pointsLimit = 51
 
 window.onload = () => {
-    updatePlayerCount()
+    generatePlayerInputs()
 }
 
 document.querySelector('#players').addEventListener('change', (e) => {
     playerCount = parseInt(e.target.value, 10)
-    updatePlayerCount()
+    generatePlayerInputs()
 })
 
 document.querySelector('#points').addEventListener('change', (e) => {
     pointsLimit = parseInt(e.target.value, 10)
 })
 
-function updatePlayerCount() {
-    playerNamesForm.innerText = ""
+function generatePlayerInputs() {
+    playerNameInputs.innerText = ""
     for (let i = 0; i < playerCount; i++) {
         const nameBox = document.createElement('input')
         nameBox.type = 'text'
         nameBox.placeholder = `Name for Player ${i + 1}`
-        playerNamesForm.appendChild(nameBox)
+        playerNameInputs.appendChild(nameBox)
     }
 }
 
-setupForm.addEventListener('submit', (e) => {
+gameSetupForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    gameCounter.innerHTML = ""
+    scoreBoard.innerHTML = ""
 
     const playerNames = document.querySelectorAll('#names input')
     playerNames.forEach((name, index) => {
-        const playerCard = document.createElement('div')
-        playerCard.classList.add('player-card')
+        const playerPanel = document.createElement('div')
+        playerPanel.classList.add('player-card')
         const playerName = document.createElement('p')
 
         playerName.innerText = name.value.trim() !== "" ? name.value : `Player ${index + 1}`;
         playerName.classList.add('player-name')
 
         let points = 0
-        const pointsCounter = document.createElement('p')
-        pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
-        pointsCounter.classList.add('points-counter')
+        const scoreDisplay = document.createElement('p')
+        scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
+        scoreDisplay.classList.add('points-counter')
 
         const addOneBtn = document.createElement('button')
         addOneBtn.innerText = '+ 1'
         addOneBtn.addEventListener('click', () => {
             points++
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
         const addThreeBtn = document.createElement('button')
         addThreeBtn.innerText = '+ 3'
         addThreeBtn.addEventListener('click', () => {
             points += 3
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
         const addFiveBtn = document.createElement('button')
         addFiveBtn.innerText = '+ 5'
         addFiveBtn.addEventListener('click', () => {
             points += 5
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
         const addTenBtn = document.createElement('button')
         addTenBtn.innerText = '+ 10'
         addTenBtn.addEventListener('click', () => {
             points += 10
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
         const removeOneBtn = document.createElement('button')
         removeOneBtn.innerText = '- 1'
@@ -79,7 +79,7 @@ setupForm.addEventListener('submit', (e) => {
             } else {
                 points = 0
             }
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
         const removeThreeBtn = document.createElement('button')
         removeThreeBtn.innerText = '- 3'
@@ -89,7 +89,7 @@ setupForm.addEventListener('submit', (e) => {
             } else {
                 points = 0
             }
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
         const removeFiveBtn = document.createElement('button')
         removeFiveBtn.innerText = '- 5'
@@ -99,7 +99,7 @@ setupForm.addEventListener('submit', (e) => {
             } else {
                 points = 0
             }
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
         const removeTenBtn = document.createElement('button')
         removeTenBtn.innerText = '- 10'
@@ -109,7 +109,7 @@ setupForm.addEventListener('submit', (e) => {
             } else {
                 points = 0
             }
-            pointsCounter.textContent = `${points} (${pointsLimit - points} to win)`
+            scoreDisplay.textContent = `${points} (${pointsLimit - points} to win)`
         })
 
         const positiveButtons = document.createElement('div')
@@ -117,8 +117,8 @@ setupForm.addEventListener('submit', (e) => {
         const negativeButtons = document.createElement('div')
         negativeButtons.classList.add('negative-buttons')
 
-        playerCard.appendChild(playerName)
-        playerCard.appendChild(pointsCounter)
+        playerPanel.appendChild(playerName)
+        playerPanel.appendChild(scoreDisplay)
         positiveButtons.appendChild(addOneBtn)
         positiveButtons.appendChild(addThreeBtn)
         positiveButtons.appendChild(addFiveBtn)
@@ -127,19 +127,19 @@ setupForm.addEventListener('submit', (e) => {
         negativeButtons.appendChild(removeThreeBtn)
         negativeButtons.appendChild(removeFiveBtn)
         negativeButtons.appendChild(removeTenBtn)
-        playerCard.appendChild(positiveButtons)
-        playerCard.appendChild(negativeButtons)
-        gameCounter.appendChild(playerCard)
+        playerPanel.appendChild(positiveButtons)
+        playerPanel.appendChild(negativeButtons)
+        scoreBoard.appendChild(playerPanel)
     })
-    setupForm.classList.add('hidden')
+    gameSetupForm.classList.add('hidden')
 })
 
 resetBtn.addEventListener('click', () => {
     if (window.confirm("Are you sure?")) {
-        setupForm.reset()
-        setupForm.classList.remove('hidden')
-        gameCounter.innerHTML = ""
+        gameSetupForm.reset()
+        gameSetupForm.classList.remove('hidden')
+        scoreBoard.innerHTML = ""
         playerCount = 2
-        updatePlayerCount()
+        generatePlayerInputs()
     }
 })
